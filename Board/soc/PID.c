@@ -5,14 +5,14 @@
 #include "encoder.h"
 #include "ANO_SpeedSend.h"
 
-#if 1
+#if 0
 #include "led.h"
 #include "delay.h"
 #endif
 
-float Kp = 3  ; //比例常数
-float Ti = 0.09 ; //积分时间常数
-float Td = 0.0028 ;  //微分时间常数
+float Kp = 0.1  ; //比例常数
+float ki = 0.09 ; //积分常数
+float kd = 0.75 ;  //微分常数
 
 /*********************
 *初始化，参数清零清零*
@@ -22,8 +22,8 @@ void incPIDinit(PIDtypedef *PIDx)
 	PIDx->setpoint = 3;			//设定目标
 	PIDx->sum_error = 0;		//误差累计
   PIDx->proportion = Kp;		//比例常数
-  PIDx->integral = 0;		//积分常数
-  PIDx->derivative = 0;		//微分常数
+  PIDx->integral = ki;		//积分常数
+  PIDx->derivative = kd;		//微分常数
   PIDx->last_error = 0;		//e[-1]
   PIDx->prev_error = 0;		//e[-2]
 	
@@ -98,8 +98,8 @@ void PID_setpoint(PIDtypedef*PIDx,u16 setvalue)
 void PID_set(float pp,float ii,float dd)
 {
 	Kp = pp; //比例常数
-	Ti = ii; //积分时间常数
-	Td = dd;  //微分时间常数
+	ki = ii; //积分时间常数
+	kd = dd;  //微分时间常数
 }
 
 
@@ -113,11 +113,11 @@ void TIM6_IRQHandler(void)
 {
 	if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET) {	//更新中断
 		
-		if(count == 50) {
+		if(count == 20) {
 			int32_t cnt_temp;
 			double pulse, round_t;
 			cnt_temp = read_cnt();						//得到跳变沿计数值（脉冲个数的两倍）
-			pulse = (1000 / 50)* cnt_temp/2.0f;						//由于是TIM_EncoderMode_TI12，所以要二分频，即除以，得到实际的跳变沿个数值（脉冲值的两倍）
+			pulse = (1000 / 20)* cnt_temp/2.0f;						//由于是TIM_EncoderMode_TI12，所以要二分频，即除以，得到实际的跳变沿个数值（脉冲值的两倍）
 			round_t = pulse / 520.0f;				//假设电机每转产生260个脉冲，那么就有520个跳变沿，则通过该公式可求出电机转了几圈		
 			ANO_Send_Data((u16)(round_t * 10000)); 
 			

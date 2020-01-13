@@ -151,9 +151,9 @@ void UART4_IRQHandler(void)
 			MotorRun(ucTemp, 0);
 			printf("temp:%u\n", ucTemp);
 			*/
-			float pp;
-			scanf("%f", &pp);
-			PID_set(pp, 0, 0);
+			float pp, ii, dd;
+			scanf("%f,%f,%f", &pp, &ii, &dd);
+			PID_set(pp, ii, dd);
 			
 			
 		}

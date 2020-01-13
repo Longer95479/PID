@@ -34,5 +34,3 @@
 .\objects\pid.o: D:\Longer\Keil\Keil  Core\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\pid.o: ..\Board\inc\encoder.h
 .\objects\pid.o: ..\Board\inc\ANO_SpeedSend.h
-.\objects\pid.o: ..\Board\inc\led.h
-.\objects\pid.o: ..\Board\inc\delay.h

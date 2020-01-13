@@ -1,4 +1,4 @@
-;#<FEEDBACK># ARM Linker, 5060750: Last Updated: Mon Jan 13 16:27:16 2020
+;#<FEEDBACK># ARM Linker, 5060750: Last Updated: Mon Jan 13 17:03:24 2020
 ;VERSION 0.2
 ;FILE ano_speedsend.o
 ;FILE delay.o
@@ -15,8 +15,6 @@ NVIC_SystemLPConfig <= USED 0
 ;FILE motor.o
 ;FILE pid.o
 PID_setpoint <= USED 0
-incPIDLConfig <= USED 0
-incPIDinit <= USED 0
 ;FILE startup_stm32f10x_hd.o
 ;FILE stm32f10x_adc.o
 ADC_AnalogWatchdogCmd <= USED 0
