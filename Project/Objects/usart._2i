@@ -1,0 +1,6 @@
+--c99 --gnu -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\APP\inc -I ..\Board\inc -I ..\CMSIS\CoreSupport -I ..\Libraries\STM32F10x_StdPeriph_Driver\inc
+-I.\RTE\_Template
+-I"D:\Longer\Keil\Keil Pack\Keil\STM32F1xx_DFP\2.3.0\Device\Include"
+-I"D:\Longer\Keil\Keil  Core\ARM\CMSIS\Include"
+-D__UVISION_VERSION="528" -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD
+-o .\objects\usart.o --omf_browse .\objects\usart.crf --depend .\objects\usart.d --feedback ".\Objects\Template.fed" "..\Board\soc\usart.c"
