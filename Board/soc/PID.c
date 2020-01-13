@@ -122,9 +122,9 @@ void TIM6_IRQHandler(void)
 			round_t = pulse / 520.0f;				//假设电机每转产生260个脉冲，那么就有520个跳变沿，则通过该公式可求出电机转了几圈		
 			ANO_Send_Data((u16)(round_t * 10000)); 
 			
-			float PWM_L;
+			int PWM_L;
 			round_t	+= incPIDcalc(&PID_L, round_t);
-			PWM_L += 960 * round_t;		//忘了个加号！！！致命！这可是增量式啊。。。。
+			PWM_L += (int)(960 * round_t);		//忘了个加号！！！致命！这可是增量式啊。。。。
 			MotorRun(PWM_L, 0);	
 		}
 		else
