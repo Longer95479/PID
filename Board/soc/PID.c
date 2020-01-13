@@ -116,12 +116,13 @@ void TIM6_IRQHandler(void)
 		if(count == 20) {
 			int32_t cnt_temp;
 			float pulse, round_t;
+			
 			cnt_temp = read_cnt();						//得到跳变沿计数值（脉冲个数的两倍）
 			pulse = (1000 / 20)* cnt_temp/2.0f;						//由于是TIM_EncoderMode_TI12，所以要二分频，即除以，得到实际的跳变沿个数值（脉冲值的两倍）
 			round_t = pulse / 520.0f;				//假设电机每转产生260个脉冲，那么就有520个跳变沿，则通过该公式可求出电机转了几圈		
 			ANO_Send_Data((u16)(round_t * 10000)); 
 			
-			uint32_t PWM_L;
+			float PWM_L;
 			round_t	+= incPIDcalc(&PID_L, round_t);
 			PWM_L += 960 * round_t;		//忘了个加号！！！致命！这可是增量式啊。。。。
 			MotorRun(PWM_L, 0);	
