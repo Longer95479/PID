@@ -154,6 +154,7 @@ void UART4_IRQHandler(void)
 			float pp, ii, dd;
 			scanf("%f,%f,%f", &pp, &ii, &dd);
 			PID_set(pp, ii, dd);
+			printf("pp = %f, ii = %f, dd = %f\n", pp, ii, dd);
 			
 			
 		}

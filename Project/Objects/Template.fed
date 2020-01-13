@@ -1,4 +1,4 @@
-;#<FEEDBACK># ARM Linker, 5060750: Last Updated: Mon Jan 13 17:42:07 2020
+;#<FEEDBACK># ARM Linker, 5060750: Last Updated: Mon Jan 13 17:56:55 2020
 ;VERSION 0.2
 ;FILE ano_speedsend.o
 ;FILE delay.o
@@ -466,4 +466,3 @@ WWDG_SetWindowValue <= USED 0
 SystemCoreClockUpdate <= USED 0
 ;FILE usart.o
 Usart_SendString <= USED 0
-fputc <= USED 0
