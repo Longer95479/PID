@@ -109,6 +109,7 @@ void PID_set(float pp,float ii,float dd)
 extern u16 rsp;
 extern PIDtypedef PID_L;
 uint8_t count = 0;
+int PWM_L = 0; //忘记设置PWM初始值了。。。
 void TIM6_IRQHandler(void)
 {
 	if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET) {	//更新中断
@@ -122,7 +123,6 @@ void TIM6_IRQHandler(void)
 			round_t = pulse / 520.0f;				//假设电机每转产生260个脉冲，那么就有520个跳变沿，则通过该公式可求出电机转了几圈		
 			ANO_Send_Data((u16)(round_t * 10000)); 
 			
-			int PWM_L;
 			round_t	+= incPIDcalc(&PID_L, round_t);
 			PWM_L += (int)(960 * round_t);		//忘了个加号！！！致命！这可是增量式啊。。。。
 			MotorRun(PWM_L, 0);	
