@@ -10,7 +10,7 @@
 #include "delay.h"
 #endif
 
-float Kp = 0.1  ; //比例常数
+float Kp = 100  ; //比例常数
 float ki = 0.09 ; //积分常数
 float kd = 0.75 ;  //微分常数
 
@@ -112,7 +112,7 @@ uint8_t count = 0;
 void TIM6_IRQHandler(void)
 {
 	if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET) {	//更新中断
-		
+		//速度采样和控制频率为 20us/time
 		if(count == 20) {
 			int32_t cnt_temp;
 			float pulse, round_t;
