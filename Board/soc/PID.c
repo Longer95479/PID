@@ -33,22 +33,22 @@ void incPIDinit(PIDtypedef *PIDx)
 /********
 *PID计算*
 ********/
-int incPIDcalc(PIDtypedef *PIDx,u16 nextpoint)
+int incPIDcalc(PIDtypedef *PIDx,u16 nowpoint)
 {
-	int iError,iincpid;
+	int Error,incpid;
 	
-	iError = PIDx->setpoint - nextpoint;  //当前误差
+	Error = PIDx->setpoint - nowpoint;  //当前误差
 	
-	iincpid=                                                          //增量计算
-	PIDx->proportion * (iError-PIDx->last_error)
-	+ PIDx->integral * iError
-	+ PIDx->derivative * (iError - 2 * PIDx->last_error + PIDx->prev_error);
+	incpid=                                                          //增量计算
+	PIDx->proportion * (Error - PIDx->last_error)
+	+ PIDx->integral * Error
+	+ PIDx->derivative * (Error - 2 * PIDx->last_error + PIDx->prev_error);
  
 	PIDx->prev_error = PIDx->last_error;	//存储误差，便于下次计算
 	
-	PIDx->last_error = iError;
+	PIDx->last_error = Error;
 	
-	return (iincpid) ;
+	return (incpid) ;
 
 }
 
@@ -123,7 +123,7 @@ void TIM6_IRQHandler(void)
 			
 			uint32_t PWM_L;
 			round_t	+= incPIDcalc(&PID_L, round_t);
-			PWM_L = 960 * round_t;
+			PWM_L += 960 * round_t;		//忘了个加号！！！致命！这可是增量式啊。。。。
 			MotorRun(PWM_L, 0);	
 		}
 		else
