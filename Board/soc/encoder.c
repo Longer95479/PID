@@ -79,7 +79,7 @@ void TIM_ICUserValue_Init(void)
 
 int32_t read_cnt(void)
 {
-	uint32_t encoder_cnt;
+	int32_t encoder_cnt;
 	encoder_cnt = TIM4->CNT;		//读取计数器CNT的值，CNT系uint32_t型的变量
 	TIM_SetCounter(TIM4, 0);		//每一次读取完计数值后将计数值清零，重新开始累加脉冲，方便下一次计数
 	return encoder_cnt;				//返回的值就是本次读到的计数值

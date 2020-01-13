@@ -10,7 +10,7 @@
 #include "delay.h"
 #endif
 
-float Kp = 1.5  ; //比例常数
+float Kp = 3  ; //比例常数
 float Ti = 0.09 ; //积分时间常数
 float Td = 0.0028 ;  //微分时间常数
 
@@ -113,11 +113,11 @@ void TIM6_IRQHandler(void)
 {
 	if (TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET) {	//更新中断
 		
-		if(count == 10) {
-			uint32_t cnt_temp;
+		if(count == 50) {
+			int32_t cnt_temp;
 			double pulse, round_t;
 			cnt_temp = read_cnt();						//得到跳变沿计数值（脉冲个数的两倍）
-			pulse = 100 * cnt_temp/2.0f;						//由于是TIM_EncoderMode_TI12，所以要二分频，即除以，得到实际的跳变沿个数值（脉冲值的两倍）
+			pulse = (1000 / 50)* cnt_temp/2.0f;						//由于是TIM_EncoderMode_TI12，所以要二分频，即除以，得到实际的跳变沿个数值（脉冲值的两倍）
 			round_t = pulse / 520.0f;				//假设电机每转产生260个脉冲，那么就有520个跳变沿，则通过该公式可求出电机转了几圈		
 			ANO_Send_Data((u16)(round_t * 10000)); 
 			
