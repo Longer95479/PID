@@ -10,7 +10,7 @@
 #include "delay.h"
 #endif
 
-float Kp = 100  ; //比例常数
+float Kp = 1.5  ; //比例常数
 float ki = 0.09 ; //积分常数
 float kd = 0.75 ;  //微分常数
 
