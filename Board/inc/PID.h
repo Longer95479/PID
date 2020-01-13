@@ -20,7 +20,7 @@ int prev_error;//e[-2]
 
 void PIDperiodinit(u16 arr,u16 psc);        //PID 采样定时器设定
 void incPIDinit(PIDtypedef *PIDx);                //初始化，参数清零
-int incPIDcalc(PIDtypedef*PIDx,u16 nextpoint);           //PID计算
+float incPIDcalc(PIDtypedef*PIDx,u16 nextpoint);           //PID计算
 void PID_setpoint(PIDtypedef*PIDx,u16 setvalue);  //设定 PID预期值
 void PID_set(float pp,float ii,float dd);//设定PID  kp ki kd三个参数
 void incPIDLConfig(void); //PID_L配置 

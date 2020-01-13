@@ -33,9 +33,9 @@ void incPIDinit(PIDtypedef *PIDx)
 /********
 *PID计算*
 ********/
-int incPIDcalc(PIDtypedef *PIDx,u16 nowpoint)
+float incPIDcalc(PIDtypedef *PIDx,u16 nowpoint)
 {
-	int Error,incpid;
+	float Error,incpid;
 	
 	Error = PIDx->setpoint - nowpoint;  //当前误差
 	
@@ -115,7 +115,7 @@ void TIM6_IRQHandler(void)
 		
 		if(count == 20) {
 			int32_t cnt_temp;
-			double pulse, round_t;
+			float pulse, round_t;
 			cnt_temp = read_cnt();						//得到跳变沿计数值（脉冲个数的两倍）
 			pulse = (1000 / 20)* cnt_temp/2.0f;						//由于是TIM_EncoderMode_TI12，所以要二分频，即除以，得到实际的跳变沿个数值（脉冲值的两倍）
 			round_t = pulse / 520.0f;				//假设电机每转产生260个脉冲，那么就有520个跳变沿，则通过该公式可求出电机转了几圈		
