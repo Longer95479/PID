@@ -124,7 +124,7 @@ void TIM6_IRQHandler(void)
 			ANO_Send_Data((u16)(round_t * 10000)); 
 			
 			round_t	+= incPIDcalc(&PID_L, round_t);
-			PWM_L += (int)(960 * round_t);		//忘了个加号！！！致命！这可是增量式啊。。。。
+			PWM_L = (int)(960 * round_t);		//其实不用增加加号。。。因为上一句已经操作好了
 			MotorRun(PWM_L, 0);	
 			
 			count = 0; //忘记清零计数器了
